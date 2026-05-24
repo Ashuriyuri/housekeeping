@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply bg-slate-50 font-sans text-slate-900 antialiased;
+    }
+
+    ::selection {
+        @apply bg-indigo-100 text-indigo-900;
+    }
+}
+
+@layer components {
+    .hk-card {
+        @apply rounded-lg border border-slate-200 bg-white shadow-sm transition duration-200;
+    }
+
+    .hk-card-hover {
+        @apply hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md;
+    }
+
+    .hk-section-title {
+        @apply text-base font-semibold text-slate-950;
+    }
+
+    .hk-section-subtitle {
+        @apply mt-1 text-sm text-slate-500;
+    }
+
+    .hk-button {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .hk-button-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .hk-button-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition duration-200 hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .hk-button-success {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .hk-button-warning {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .hk-button-danger {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-200 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .hk-icon-button {
+        @apply inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+    }
+
+    .hk-input {
+        @apply w-full rounded-lg border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500;
+    }
+
+    .hk-select {
+        @apply w-full rounded-lg border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm transition focus:border-indigo-500 focus:ring-indigo-500;
+    }
+
+    .hk-textarea {
+        @apply w-full rounded-lg border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-indigo-500;
+    }
+
+    .hk-label {
+        @apply mb-2 block text-sm font-semibold text-slate-700;
+    }
+
+    .hk-help {
+        @apply mt-1 text-xs text-slate-500;
+    }
+
+    .hk-error {
+        @apply mt-1 block text-sm font-medium text-rose-600;
+    }
+
+    .hk-table-wrap {
+        @apply overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm;
+    }
+
+    .hk-table {
+        @apply min-w-full divide-y divide-slate-200;
+    }
+
+    .hk-table-head {
+        @apply bg-slate-50;
+    }
+
+    .hk-table-th {
+        @apply px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500;
+    }
+
+    .hk-table-td {
+        @apply px-5 py-4 text-sm text-slate-600;
+    }
+
+    .hk-table-row {
+        @apply transition hover:bg-indigo-50/40;
+    }
+
+    .hk-badge {
+        @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+    }
+
+    .hk-badge-pending {
+        @apply inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700 ring-1 ring-inset ring-amber-200;
+    }
+
+    .hk-badge-in-progress {
+        @apply inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700 ring-1 ring-inset ring-blue-200;
+    }
+
+    .hk-badge-completed {
+        @apply inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-200;
+    }
+
+    .hk-badge-active {
+        @apply inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-200;
+    }
+
+    .hk-badge-inactive {
+        @apply inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600 ring-1 ring-inset ring-slate-200;
+    }
+
+    .hk-badge-danger {
+        @apply inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200;
+    }
+
+    .hk-mobile-card {
+        @apply rounded-lg border border-slate-200 bg-white p-4 shadow-sm;
+    }
+
+    .hk-empty {
+        @apply rounded-lg border border-dashed border-slate-300 bg-white px-6 py-12 text-center;
+    }
+
+    .hk-stat-icon {
+        @apply flex h-11 w-11 items-center justify-center rounded-lg;
+    }
+
+    .hk-service-choice {
+        @apply block rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50/40;
+    }
+
+    .hk-employee-choice {
+        @apply block rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-blue-200 hover:bg-blue-50/40;
+    }
+}
