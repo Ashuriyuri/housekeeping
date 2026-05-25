@@ -45,14 +45,18 @@ RUN php artisan config:clear \
 && php artisan view:clear
 # Create storage symlink
 RUN php artisan storage:link || true
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Fix permissions
-RUN mkdir -p storage/framework/cache storage/framework/sessions \
+RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions \
 storage/framework/views bootstrap/cache public/uploads \
 && chown -R www-data:www-data storage bootstrap/cache public/uploads \
-&& chmod -R 775 storage bootstrap/cache public/uploads
-# (Optional) Run migrations
-RUN php artisan migrate --force || true
+&& chmod -R 777 storage bootstrap/cache public/uploads
+
 # Expose port
 EXPOSE 10000
-# Start Apache
-CMD ["apache2-foreground"]
+
+# Run entrypoint script
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
