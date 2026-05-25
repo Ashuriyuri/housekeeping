@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: housekeeping
+    runtime: docker
+    plan: free
+    repo: https://github.com/Ashuriyuri/housekeeping
+    branch: main
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_NAME
+        value: Housekeeping
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://housekeeping-mth6.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromService:
+          name: MySQL Database
+          property: host
+        sync: false
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        fromService:
+          name: MySQL Database
+          property: database
+        sync: false
+      - key: DB_USERNAME
+        fromService:
+          name: MySQL Database
+          property: username
+        sync: false
+      - key: DB_PASSWORD
+        fromService:
+          name: MySQL Database
+          property: password
+        sync: false
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: database
