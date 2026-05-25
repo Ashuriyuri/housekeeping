@@ -1,0 +1,14 @@
+runtime: php82
+
+env: standard
+
+env_variables:
+  LARAVEL_ENV: "production"
+
+handlers:
+  - url: /
+    static_files: public/index.php
+    upload: public/index.php
+
+  - url: /(.*)
+    script: public/index.php
