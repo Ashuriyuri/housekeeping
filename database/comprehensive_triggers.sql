@@ -37,7 +37,7 @@ BEGIN
             WHEN s.pricing_type = 'fixed' 
             THEN COALESCE(aps.custom_price, s.base_price) * COALESCE(aps.quantity, 1)
             WHEN s.pricing_type = 'per_sqm'
-            THEN COALESCE(aps.custom_price, s.base_price) * NEW.area_sqm
+            THEN COALESCE(aps.custom_price, s.base_price) * COALESCE(NEW.area_sqm, aps.quantity, 1)
             ELSE 0
           END
         ), 0),
@@ -387,6 +387,7 @@ BEGIN
             WHEN s.pricing_type = 'fixed' 
             THEN COALESCE(aps.custom_price, s.base_price) * COALESCE(aps.quantity, 1)
             WHEN s.pricing_type = 'per_sqm'
+            THEN COALESCE(aps.custom_price, s.base_price) * COALESCE(a.area_sqm, aps.quantity, 1)
             THEN COALESCE(aps.custom_price, s.base_price) * a.area_sqm
             ELSE 0
           END

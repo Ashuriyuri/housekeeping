@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard', function () { 
         $totalAppointments = \App\Models\Appointment::count();
         $pendingAppointments = \App\Models\Appointment::where('status', 'Pending')->count();
         $inProgressAppointments = \App\Models\Appointment::where('status', 'In Progress')->count();
@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
         $totalServices = \App\Models\Service::count();
         $totalRevenue = \App\Models\Payment::where('payment_status', 'Paid')->sum('amount');
 
-        return view('dashboard', compact(
+        $response = response()->view('dashboard', compact(
             'totalAppointments',
             'pendingAppointments',
             'inProgressAppointments',
@@ -30,6 +30,10 @@ Route::middleware('auth')->group(function () {
             'totalServices',
             'totalRevenue'
         ));
+
+        return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+                        ->header('Pragma', 'no-cache')
+                        ->header('Expires', '0');
     })->name('dashboard');
 
     // Appointments

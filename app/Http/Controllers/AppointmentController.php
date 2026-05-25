@@ -140,28 +140,20 @@ class AppointmentController extends Controller
 
         // Additional validation before completion
         if ($validated['status'] === 'Completed') {
-            // Check if appointment has an area (required for payment calculation)
-            if (is_null($appointment->area_sqm) || $appointment->area_sqm == 0) {
-                return redirect()->route('appointments.edit', $appointment)
-                    ->with('error', 'Cannot complete appointment: Area (sqm) is required for payment calculation. Please update the appointment with the area.');
-            }
-
             // Check if appointment has services
             if ($appointment->services()->count() === 0) {
                 return redirect()->route('appointments.edit', $appointment)
                     ->with('error', 'Cannot complete appointment: At least one service must be assigned.');
             }
-
-            // Check if appointment has employees assigned
-            if ($appointment->employees()->count() === 0) {
-                return redirect()->route('appointments.edit', $appointment)
-                    ->with('error', 'Cannot complete appointment: At least one employee must be assigned.');
-            }
         }
 
-        $appointment->update($validated);
-
-        return redirect()->route('appointments.show', $appointment)->with('success', 'Appointment status updated successfully.');
+        try {
+            $appointment->update($validated);
+            return redirect()->route('appointments.show', $appointment)->with('success', 'Appointment status updated successfully.');
+        } catch (\Exception $e) {
+            // Catch database trigger errors (e.g. payment amount validation)
+            return redirect()->back()->with('error', 'Failed to update status: ' . $e->getMessage());
+        }
     }
 
     public function destroy(Appointment $appointment)
